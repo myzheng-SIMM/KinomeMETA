@@ -3,12 +3,14 @@ The code of "KinomeMETA: meta-learning enhanced kinome-wide polypharmacology pro
 
 Kinase inhibitors are crucial in cancer treatment, but drug resistance and side effects hinder the development of effective drugs. To address these challenges, it is essential to analyze the polypharmacology of kinase inhibitor and identify compound with high selectivity profile. This study presents KinomeMETA, a framework for profiling the activity of small molecule kinase inhibitors across a panel of 661 kinases. By training a meta-learner based on a graph neural network and fine-tuning it to create kinase-specific learners, KinomeMETA outperforms benchmark multi-task models and other kinase profiling models. It provides higher accuracy for understudied kinases with limited known data and broader coverage of kinase types, including important mutant kinases. Case studies on the discovery of new scaffold inhibitors for PKMYT1 and selective inhibitors for FGFRs demonstrate the role of KinomeMETA in virtual screening and kinome-wide activity profiling. Overall, KinomeMETA has the potential to accelerate kinase drug discovery by more effectively exploring the kinase polypharmacology landscape.
 
+We provide three scripts for training, fine-tuning new models and predicting new compounds, respectively. 
+
 ### Train model
 ```
 bash train.sh
-
+```
 or
-
+```
 python train.py   --meta_batchsz 15 \
                   --meta_lr 0.001 \
                   --num_updates 5 \
@@ -28,9 +30,9 @@ python train.py   --meta_batchsz 15 \
 ### Finetune new kinase models
 ```
 bash finetune.sh
-
+```
 or
-
+```
 python finetune.py  --kinase_data_path "./data/finetune/toy_finetune_task.csv" \
                     --meta_model_path './results/meta-learner/2022-08-24-04_18_42_meta-learner_state_dict.pth' \
                     --save_dir "./results/base-learner/toy_finetune_task/" \
@@ -42,9 +44,9 @@ python finetune.py  --kinase_data_path "./data/finetune/toy_finetune_task.csv" \
 ### Predict new compounds
 ```
 bash predict.sh
-
+```
 or
-
+```
 python predict.py --compound_path './data/compounds/toy_compounds.csv' \
                   --baselearner_dir "./results/base-learner/" \
                   --device 0 \
